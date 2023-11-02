@@ -18,7 +18,12 @@ paths:
           required: false
           schema:
             type: string
-        #TODO3: add parameter to filter books by intervals of dates of the releaseDate
+        - in: query
+          name: releaseDateInterval
+          description: A date interval for start and end releaseDate
+          required: false
+          schema:
+            $ref: "#/components/schemas/ReleaseDateInterval"
       responses:
         200:
           description: The list of filtered books
@@ -138,5 +143,14 @@ components:
           enum:
             - M
             - F
-
+    
+    ReleaseDateInterval:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date
+        end:
+          type: string
+          format: date
     
