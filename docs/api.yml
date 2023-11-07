@@ -208,7 +208,6 @@ paths:
       operationId: getAuthors
       parameters:
         - in: query
-          required: false
           name: authorName
           schema:
             type: string
