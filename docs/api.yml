@@ -42,7 +42,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: '#/components/schemas/CrupdateBooks'
       responses:
         200:
           description: The list of created or updated books
@@ -112,25 +112,13 @@ components:
   schemas:
     Book:
       type: object
+      allOf:
+        - $ref: "#/components/schemas/CrupdateBooks"
       properties:
-        id:
-          type: string
-        bookName:
-          type: string
         author:
           type: object
           $ref: "#/components/schemas/Author"
-        pageNumbers:
-          type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: dat
+
     Author:
       type: object
       properties:
@@ -153,4 +141,23 @@ components:
         end:
           type: string
           format: date
+
+    CrupdateBooks:
+      type: object
+      properties:
+        id:
+          type: string
+        bookName:
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        releaseDate:
+          type: string
+          format: dat
     
