@@ -6,6 +6,7 @@ info:
 servers:
   - url: https://library.com
 paths:
+#### BOOKS
   /books:
     get:
       summary: Get all books
@@ -52,6 +53,78 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+
+  
+  /books/{bookId}/authors/{authorId}:
+    put:
+      operationId: addAuthor
+      summary: "Add an author to a book"
+      parameters:
+        - in: path
+          name: bookId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: authorId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "A book with the author it's attached to"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+
+  /books/authors:
+    put:
+      operationId: addAuthors
+      summary: "Add some authors to some books"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateBookAuthor"
+      responses:
+        200:
+          description: "A list of the updated books"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+  
+  /book/page/{page}/size/{size}:
+    get:
+      summary: "Get a book on a given page of a given size"   
+      operationId: getPagedBooks
+      parameters:
+        - in: path
+          required: false
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: path
+          required: false
+          name: size
+          schema:
+            type: integer
+            default: 50
+      responses:
+        200:
+          description: "A list of queried books given on the parameters"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+
+#### AUTHOR  
   /authors:
     get:
       summary: Get all authors
@@ -107,6 +180,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Author"
+ 
+  /authors/page/{page}/size/{size}:
+    get:
+      summary: "Get an Auhtor on a given page on a given size"
+      operationId: getPagedAuthors
+      parameters:
+        - in: path
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: path
+          name: size
+          required: false
+          schema:
+            type: integer
+            default: 50
+      responses:
+        200:
+          description: "A list of queried Author with the given parameters"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Author"
         
 components:
   schemas:
@@ -160,4 +260,21 @@ components:
         releaseDate:
           type: string
           format: dat
+        
+    UpdateBookAuthor:
+      type: array
+      items:
+        type: object
+        $ref: "#/components/schemas/BookAuthor"
+        
+    BookAuthor:
+      type: object
+      properties:
+        bookId:
+          type: string
+        authorId:
+          type: string
+      required:
+        - bookId
+        - authorId
     
