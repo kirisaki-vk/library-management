@@ -135,6 +135,54 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
+  
+  /books/topics:
+    put:
+      summary: "Add a some topics to some books"
+      operationId: addTopics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/UpdateBookTopic"
+
+      responses:
+        200:
+          description: "A list of updated books"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+  
+  /books/{bookId}/topics/{topicId}:
+    put:
+      summary: "Add a topic to a given book"
+      operationId: addTopic
+      parameters:
+        - in: path
+          name: bookId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: topicId
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        200:
+          description: "The given book with it's topic"
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Book"
+                
 
 #### AUTHOR  
   /authors:
@@ -230,6 +278,9 @@ components:
         author:
           type: object
           $ref: "#/components/schemas/Author"
+        topic:
+          type: object
+          $ref: "#/components/schemas/Topic"
 
     Author:
       type: object
@@ -253,12 +304,6 @@ components:
           type: string
         pageNumbers:
           type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
         releaseDate:
           type: string
           format: dat
@@ -268,6 +313,12 @@ components:
       items:
         type: object
         $ref: "#/components/schemas/BookAuthor"
+    
+    UpdateBookTopic:
+      type: array
+      items:
+        type: object
+        $ref: "#/components/schemas/BookTopic"
         
     BookAuthor:
       type: object
@@ -280,3 +331,25 @@ components:
         - bookId
         - authorId
     
+    BookTopic:
+      type: object
+      properties:
+        bookId:
+          type: string
+        topicId:
+          type: string
+      required:
+        - "bookId"
+        - "topicId"
+    
+    Topic:
+      type: object
+      properties:
+        id: 
+          type: string
+        topic:
+          type: string
+          enum:
+          - ROMANCE
+          - COMEDY
+          - OTHER
