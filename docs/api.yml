@@ -125,13 +125,13 @@ paths:
       operationId: getPagedBooks
       parameters:
         - in: path
-          required: false
+          required: true
           name: page
           schema:
             type: integer
             default: 1
         - in: path
-          required: false
+          required: true
           name: size
           schema:
             type: integer
@@ -269,13 +269,13 @@ paths:
       parameters:
         - in: path
           name: page
-          required: false
+          required: true
           schema:
             type: integer
             default: 1
         - in: path
           name: size
-          required: false
+          required: true
           schema:
             type: integer
             default: 50
