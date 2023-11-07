@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.1.1
+  version: 1.2.2
   description: STD22081
 servers:
   - url: https://library.com
@@ -9,6 +9,8 @@ paths:
 #### BOOKS
   /books:
     get:
+      tags:
+        - "Books"
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
@@ -47,6 +49,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
     put:
+      tags:
+        - "Books"
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -69,6 +73,8 @@ paths:
   
   /books/{bookId}/authors/{authorId}:
     put:
+      tags:
+        - "Books"
       operationId: addAuthor
       summary: "Add an author to a book"
       parameters:
@@ -92,6 +98,8 @@ paths:
 
   /books/authors:
     put:
+      tags:
+        - "Books"
       operationId: addAuthors
       summary: "Add some authors to some books"
       requestBody:
@@ -111,6 +119,8 @@ paths:
   
   /book/page/{page}/size/{size}:
     get:
+      tags:
+        - "Books"
       summary: "Get a book on a given page of a given size"   
       operationId: getPagedBooks
       parameters:
@@ -138,6 +148,8 @@ paths:
   
   /books/topics:
     put:
+      tags:
+        - "Books"
       summary: "Add a some topics to some books"
       operationId: addTopics
       requestBody:
@@ -160,6 +172,8 @@ paths:
   
   /books/{bookId}/topics/{topicId}:
     put:
+      tags:
+        - "Books"
       summary: "Add a topic to a given book"
       operationId: addTopic
       parameters:
@@ -182,11 +196,13 @@ paths:
               schema:
                 type: object
                 $ref: "#/components/schemas/Book"
-                
+
 
 #### AUTHOR  
   /authors:
     get:
+      tags:
+        - "Authors"
       summary: Get all authors
       description: Get all authors will be ordered by name descending by default
       operationId: getAuthors
@@ -206,6 +222,8 @@ paths:
                 items:
                   $ref: "#/components/schemas/Author"
     put:
+      tags:
+        - "Authors"
       summary: Create or Update an Author
       operationId: crupdateAuthor
       requestBody:
@@ -224,6 +242,8 @@ paths:
                   $ref: "#/components/schemas/Author"
 
     delete:
+      tags:
+        - "Authors"
       summary: Delete an Author
       operationId: deleteAuthor
       parameters:
@@ -243,6 +263,8 @@ paths:
  
   /authors/page/{page}/size/{size}:
     get:
+      tags:
+        - "Authors"
       summary: "Get an Auhtor on a given page on a given size"
       operationId: getPagedAuthors
       parameters:
