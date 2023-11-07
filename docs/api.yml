@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.3.0
+  version: 1.4.0
   description: STD22081
 servers:
   - url: https://library.com
@@ -289,7 +289,26 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
-
+  
+  /authorTopics:
+    get:
+      tags:
+        - "Authors"
+      summary: "Show a list of topics of a given author"
+      parameters:
+        - in: query
+          name: authorId
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: "The author with it's topics"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorTopic"
+                
 #### TOPICS
   /topics:
     get:
@@ -434,3 +453,13 @@ components:
           - ROMANCE
           - COMEDY
           - OTHER
+    
+    AuthorTopic:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Author"
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: "#/components/schemas/Topic"
