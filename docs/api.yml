@@ -20,11 +20,23 @@ paths:
           schema:
             type: string
         - in: query
-          name: releaseDateInterval
-          description: A date interval for start and end releaseDate
-          required: false
+          name: releaseDateMin
+          description: |
+            If  `releaseDateMax` is not provided, `releaseDateMin` is ignored.
+            `releaseDateMin` can not be after `releaseDateMax`.
           schema:
-            $ref: "#/components/schemas/ReleaseDateInterval"
+            type: string
+            format: date
+          required: false
+        - in: query
+          name: releaseDateMax
+          description: |
+            If  `releaseDateMin` is not provided, `releaseDateMax` is ignored.
+            `releaseDateMax` can not be after `releaseDateMin`.
+          schema:
+            type: string
+            format: date
+          required: false
       responses:
         200:
           description: The list of filtered books
@@ -232,16 +244,6 @@ components:
             - M
             - F
     
-    ReleaseDateInterval:
-      type: object
-      properties:
-        start:
-          type: string
-          format: date
-        end:
-          type: string
-          format: date
-
     CrupdateBooks:
       type: object
       properties:
