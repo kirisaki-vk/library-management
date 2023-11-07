@@ -289,7 +289,66 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
-        
+
+#### TOPICS
+  /topics:
+    get:
+      tags:
+        - "Topics"
+      summary: "Get a list of topics"
+      description: |
+        "If `name` parameter is not provided, it will return all available topics
+        or it will returned topic filtered by the given name"
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+      responses:
+        200:
+          description: "A list of queried topics"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Topic"
+
+    put:
+      tags:
+        - "Topics"
+      summary: "Create or Update a Topic"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Topic"
+      responses:
+        200:
+          description: "The created or update topic"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Topic"
+
+    delete:
+      tags:
+        - "Topics"
+      summary: "Delete a topic"
+      parameters:
+        - in: query
+          name: topicId
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "The deleted author"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Topic"
+      
 components:
   schemas:
     Book:
