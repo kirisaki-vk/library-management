@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.7.0
+  version: 1.8.0
   description: STD22081
 servers:
   - url: https://library.com
@@ -132,8 +132,9 @@ paths:
       summary: "Get a book on a given page of a given size"   
       operationId: getPagedBooks
       parameters:
-        - $ref: "#/components/parameters/pageSize"
-        - $ref: "#/components/parameters/pageNumber"
+        - $ref: "#/components/parameters/pageNumberPath"
+        - $ref: "#/components/parameters/pageSizePath"
+        # - $ref: "#/components/parameters/pathPagination"
       responses:
         200:
           description: "A list of queried books given on the parameters"
@@ -299,8 +300,9 @@ paths:
           schema:
             type: string
           allowEmptyValue: true
-        - $ref: "#/components/parameters/pageNumber"
-        - $ref: "#/components/parameters/pageSize"
+        - $ref: "#/components/parameters/pageNumberQuery"
+        - $ref: "#/components/parameters/pageSizeQuery"
+        # - $ref: "#/components/parameters/queryPagination"
       responses:
         200:
           description: "A list of queried Author with the given parameters"
@@ -391,7 +393,7 @@ paths:
       
 components:
   parameters:
-    pageSize:
+    pageSizePath:
       in: path
       name: pageSize
       schema:
@@ -399,13 +401,59 @@ components:
         default: 50
       required: true
 
-    pageNumber:
+    pageNumberPath:
       in: path
       name: pageNumber
       schema:
         type: integer
         default: 1
       required: true
+    
+    pathPagination:
+      name: pathPaginantion
+      in: path
+      required: true
+      schema:
+        type: object
+        properties: 
+          pageSize:
+            type: number
+            default: 50
+            # $ref: "#/components/parameters/pageSizePath"
+          pageNumber: 
+            type: number
+            default: 1
+            # $ref: "#/components/parameters/pageNumberPath"
+          
+    pageSizeQuery:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        default: 50
+      required: true
+    pageNumberQuery:
+      name: pageNumber
+      in: query
+      schema:
+        type: integer
+        default: 1
+      required: true
+    
+    queryPagination:
+      name: queryPagination
+      in: query
+      schema:
+        type: object
+        properties:
+          pageSize:
+            type: integer
+            default: 50
+            # $ref: "#/components/parameters/pageSizeQuery"
+          pageNumber:
+            type: integer
+            default: 1
+            # $ref: "#/components/parameters/pageNumberQuery"
 
   schemas:
     Book:
