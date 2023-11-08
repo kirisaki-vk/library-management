@@ -1,10 +1,18 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.5.0
+  version: 1.5.1
   description: STD22081
 servers:
   - url: https://library.com
+tags:
+  - name: "Authors"
+    description: "Authors related endpoints"
+  - name: "Books"
+    description: "Books related endpoints"
+  - name: "Topics"
+    description: "Topics related endpoints"
+
 paths:
 #### BOOKS
   /books:
