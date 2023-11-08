@@ -265,8 +265,16 @@ paths:
       tags:
         - "Authors"
       summary: "Get an Auhtor on a given page on a given size"
+      description: |
+        "If `authorName` is provided, then it will return a paginated list of authors filtered by the given name
+        else it will return a paginated list of all authors"
       operationId: getPagedAuthors
       parameters:
+        - in: query
+          name: authorName
+          schema:
+            type: string
+          allowEmptyValue: true
         - in: path
           name: page
           required: true
