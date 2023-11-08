@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.8.0
+  version: 1.9.0
   description: STD22081
 servers:
   - url: https://library.com
@@ -48,7 +48,7 @@ paths:
             format: date
           required: false
       responses:
-        200:
+        '200':
           description: The list of filtered books
           content:
             application/json:
@@ -56,6 +56,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
     put:
       tags:
         - "Books"
@@ -69,7 +79,7 @@ paths:
               items:
                 $ref: '#/components/schemas/CrupdateBooks'
       responses:
-        200:
+        '200':
           description: The list of created or updated books
           content:
             application/json:
@@ -77,7 +87,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   
   /books/{bookId}/authors/{authorId}:
     put:
@@ -97,12 +116,22 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: "A book with the author it's attached to"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Book"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
   /books/authors:
     put:
@@ -116,7 +145,7 @@ paths:
             schema:
               $ref: "#/components/schemas/UpdateBookAuthor"
       responses:
-        200:
+        '200':
           description: "A list of the updated books"
           content:
             application/json:
@@ -124,6 +153,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   
   /book/page/{pageNumber}/size/{pageSize}:
     get:
@@ -136,7 +175,7 @@ paths:
         - $ref: "#/components/parameters/pageSizePath"
         # - $ref: "#/components/parameters/pathPagination"
       responses:
-        200:
+        '200':
           description: "A list of queried books given on the parameters"
           content:
             application/json:
@@ -144,6 +183,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   
   /books/topics:
     put:
@@ -160,7 +209,7 @@ paths:
                 $ref: "#/components/schemas/UpdateBookTopic"
 
       responses:
-        200:
+        '200':
           description: "A list of updated books"
           content:
             application/json:
@@ -168,6 +217,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   
   /books/{bookId}/topics/{topicId}:
     put:
@@ -188,13 +247,23 @@ paths:
             type: string
       
       responses:
-        200:
+        '200':
           description: "The given book with it's topic"
           content:
             application/json:
               schema:
                 type: object
                 $ref: "#/components/schemas/Book"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
 
 #### AUTHOR  
@@ -211,7 +280,7 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: A list of filtered authors
           content:
             application/json:
@@ -219,6 +288,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
     put:
       tags:
         - "Authors"
@@ -230,7 +309,7 @@ paths:
             schema:
               $ref: "#/components/schemas/Author"
       responses:
-        200:
+        '200':
           description: The list of created or updated authors
           content:
             application/json:
@@ -238,6 +317,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
     delete:
       tags:
@@ -256,7 +345,7 @@ paths:
                 example: "authorId"
 
       responses:
-        200:
+        '200':
           description: A list of the deleted Authors
           content:
             application/json:
@@ -264,6 +353,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   
   /authors/{authorId}:
     delete:
@@ -278,12 +377,22 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: "Responds by the deleted author"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Author"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
   /authors/page/{pageNumber}/size/{pageSize}:
     get:
@@ -304,7 +413,7 @@ paths:
         - $ref: "#/components/parameters/pageSizeQuery"
         # - $ref: "#/components/parameters/queryPagination"
       responses:
-        200:
+        '200':
           description: "A list of queried Author with the given parameters"
           content:
             application/json:
@@ -312,6 +421,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   
   /authorTopics:
     get:
@@ -325,12 +444,22 @@ paths:
             type: string
           required: true
       responses:
-        200:
+        '200':
           description: "The author with it's topics"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthorTopic"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
                 
 #### TOPICS
   /topics:
@@ -347,7 +476,7 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: "A list of queried topics"
           content:
             application/json:
@@ -355,6 +484,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Topic"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
     put:
       tags:
@@ -366,12 +505,22 @@ paths:
             schema:
               $ref: "#/components/schemas/Topic"
       responses:
-        200:
+        '200':
           description: "The created or update topic"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Topic"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
     delete:
       tags:
@@ -392,6 +541,38 @@ paths:
                 $ref: "#/components/schemas/Topic"
       
 components:
+  responses:
+    400:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestException'
+    403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotAuthorizedException'
+    404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceNotFoundException'
+    429:
+      description: Too many requests to the API
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsException'
+    500:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerException'
+      
   parameters:
     pageSizePath:
       in: path
@@ -549,3 +730,41 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Topic"
+    
+    Exception:
+      type: object
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+    BadRequestException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: BadRequestException
+        message: Bad request
+    NotAuthorizedException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: NotAuthorizedException
+        message: Not authorized
+    ResourceNotFoundException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: ResourceNotFoundException
+        message: Resource of type <T> identified by <I> not found
+    TooManyRequestsException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: TooManyRequestsException
+        message: Too many requests
+    InternalServerException:
+      allOf:
+        - $ref: '#/components/schemas/Exception'
+      example:
+        type: InternalServerException
+        message: Unexpected error
