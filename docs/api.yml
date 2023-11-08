@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.10.1
+  version: 1.10.2
   description: STD22081
 servers:
   - url: https://library.com
@@ -500,6 +500,8 @@ paths:
   
   /authors/import:
     post:
+      tags:
+        - "Authors"
       summary: "Import a list of Authors"
       description: |
         "The list can be posted in `application/json` fromat 
