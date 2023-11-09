@@ -1083,6 +1083,15 @@ components:
           type: string
           format: date-time
 
+    VisitorInfo:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Visitor"
+      properties:
+        borrows:
+          $ref: "#/components/schemas/BorrowList"
+        renders:
+          $ref: "#/components/schemas/RenderList"
 
     BorrowList:
       type: array
@@ -1104,8 +1113,19 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Render"
+
+    CrupdateVisitor:
+      type: object
+      properties:
+        name:
+          type: string
+        reference:
+          type: object
+
     Visitor:
       type: object
+      allOf:
+        - $ref: "#/components/schemas/CrupdateVisitor"
       properties:
         id:
           type: string
