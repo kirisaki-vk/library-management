@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.10.2
+  version: 1.10.3
   description: STD22081
 servers:
   - url: https://library.com
@@ -272,14 +272,14 @@ paths:
       summary: "Import a list of book information"
       description: |
         "The list can be posted in `application/json` fromat 
-        or in `application/vnd.ms-excel`"
+        or in `application/ms-excel`"
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/BooksImport"
 
-          application/vnd.ms-excel:
+          application/ms-excel:
             schema:
               $ref: "#/components/schemas/BooksImport"
 
@@ -289,9 +289,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/BooksImport"
+                $ref: "#/components/schemas/BooksImport"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -446,9 +444,19 @@ paths:
           schema:
             type: string
           allowEmptyValue: true
-        - $ref: "#/components/parameters/pageNumberQuery"
-        - $ref: "#/components/parameters/pageSizeQuery"
-        # - $ref: "#/components/parameters/queryPagination"
+        - in: path
+          name: pageNumber
+          required: true
+          schema:
+            allOf:
+              - $ref: "#/components/parameters/pageNumberQuery"
+        - in: path
+          name: pageSize
+          required: true
+          schema:
+            allOf:
+              - $ref: "#/components/parameters/pageSizeQuery"
+          # - $ref: "#/components/parameters/queryPagination"
       responses:
         '200':
           description: "A list of queried Author with the given parameters"
@@ -505,14 +513,14 @@ paths:
       summary: "Import a list of Authors"
       description: |
         "The list can be posted in `application/json` fromat 
-        or in `application/vnd.ms-excel`"
+        or in `application/ms-excel`"
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/AuthorImport"
 
-          application/vnd.ms-excel:
+          application/ms-excel:
             schema:
               $ref: "#/components/schemas/AuthorImport"
 
