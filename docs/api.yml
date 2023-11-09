@@ -903,6 +903,7 @@ components:
         type: integer
         default: 50
       required: true
+
     pageNumberQuery:
       name: pageNumber
       in: query
@@ -1027,12 +1028,14 @@ components:
           type: string
         message:
           type: string
+
     BadRequestException:
       allOf:
         - $ref: '#/components/schemas/Exception'
       example:
         type: BadRequestException
         message: Bad request
+
     NotAuthorizedException:
       allOf:
         - $ref: '#/components/schemas/Exception'
@@ -1045,12 +1048,14 @@ components:
       example:
         type: ResourceNotFoundException
         message: Resource of type <T> identified by <I> not found
+
     TooManyRequestsException:
       allOf:
         - $ref: '#/components/schemas/Exception'
       example:
         type: TooManyRequestsException
         message: Too many requests
+
     InternalServerException:
       allOf:
         - $ref: '#/components/schemas/Exception'
@@ -1097,6 +1102,7 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Borrow"
+
     Render:
       type: object
       properties:
@@ -1109,6 +1115,7 @@ components:
         renderDate:
           type: string
           format: date-time
+
     RenderList:
       type: array
       items:
@@ -1129,10 +1136,6 @@ components:
       properties:
         id:
           type: string
-        name:
-          type: string
-        reference:
-          type: object
 
     AuthorImport:
       type: array
