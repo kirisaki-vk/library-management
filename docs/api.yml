@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.15.6
+  version: 1.15.7
   description: STD22081
 servers:
   - url: https://library.com
@@ -589,14 +589,12 @@ paths:
           name: pageNumber
           required: true
           schema:
-            allOf:
-              - $ref: "#/components/parameters/pageNumberQuery"
+            $ref: "#/components/parameters/pageNumberQuery"
         - in: path
           name: pageSize
           required: true
           schema:
-            allOf:
-              - $ref: "#/components/parameters/pageSizeQuery"
+            $ref: "#/components/parameters/pageSizeQuery"
           # - $ref: "#/components/parameters/queryPagination"
       responses:
         '200':
