@@ -362,6 +362,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BorrowList"
+  /books/render/{visitorId}/{bookId}:
+    get:
+      tags:
+        - "Books"
+      summary: Render a book
+      description: "Make a book rendered by a specified visitor"
+      parameters:
+        - in: path
+          name: visitorId
+          schema:
+            type: string
+          required: true
+        - in: path
+          required: true
+          name: bookId
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "A list of users borrowed book"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RenderList"
 
   #### AUTHOR
   /authors:
