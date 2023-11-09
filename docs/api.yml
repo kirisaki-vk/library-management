@@ -337,7 +337,7 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-  /book/borrow/{visitorId}/{bookId}:
+  /books/borrow/{visitorId}/{bookId}:
     post:
       tags:
         - "Books"
@@ -350,11 +350,13 @@ paths:
           schema:
             type: string
           required: true
-        - in: path
+        - in: query
           required: true
           name: bookId
           schema:
-            type: string
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: "A list of users borrowed book"
