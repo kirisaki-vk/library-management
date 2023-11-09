@@ -12,6 +12,8 @@ tags:
     description: "Books related endpoints"
   - name: "Topics"
     description: "Topics related endpoints"
+  - name: "Visitor"
+    description: "Visitor related endpoints"
 
 paths:
 #### BOOKS
