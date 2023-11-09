@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.11.3
+  version: 1.14.1
   description: STD22081
 servers:
   - url: https://library.com
@@ -12,6 +12,8 @@ tags:
     description: "Books related endpoints"
   - name: "Topics"
     description: "Topics related endpoints"
+  - name: "Visitor"
+    description: "Visitor related endpoints"
 
 paths:
 #### BOOKS
@@ -352,11 +354,14 @@ paths:
           required: true
         - in: query
           required: true
+          description: Contains an array of bookId or only one bookId to be borrowed
           name: bookId
           schema:
-            type: array
-            items:
-              type: string
+            oneOf:
+              - type: array
+                items:
+                  type: string
+              - type: string
       responses:
         '200':
           description: "A list of users borrowed book"
@@ -364,6 +369,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BorrowList"
+
   /books/render/{visitorId}:
     post:
       tags:
@@ -378,11 +384,14 @@ paths:
           required: true
         - in: query
           required: true
+          description: Contains an array of bookId or only one bookId to be rendered
           name: bookId
           schema:
-            type: array
-            items:
-              type: string
+            oneOf:
+              - type: array
+                items:
+                  type: string
+              - type: string
       responses:
         '200':
           description: "A list of users borrowed book"
@@ -710,7 +719,117 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Topic"
-      
+
+#### VISITOR
+  /visitor:
+    get:
+      tags:
+        - "Visitor"
+      summary: Get all list of visitors
+      description: "Will be ordered by name desc"
+      parameters:
+        - in: query
+          name: name
+          description: "Will filter visitors by matching name"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "A list of visitor matching the request"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Visitor"
+    put:
+      tags:
+        - "Visitor"
+      summary: Crupdate a Visitor
+      description: "Create or update a visitor"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Visitor"
+                - $ref: "#/components/schemas/CrupdateVisitor"
+      responses:
+        '200':
+          description: "The modified or added Visitor"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Visitor"
+
+    delete:
+      tags:
+        - "Visitor"
+      summary: Delete one or some visitor
+      parameters:
+        - in: query
+          required: true
+          name: visitorId
+          schema:
+            oneOf:
+              - type: array
+                description: An array of visitorIds to be deleted
+                items:
+                  type: string
+              - type: string
+                description: A visitor id to be deleted
+
+      responses:
+        '200':
+          description: "A list of deleted visitor or the deleted visitor"
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/Visitor"
+                  - $ref: "#/components/schemas/Visitor"
+
+  /visitor/{visitorId}/info:
+    get:
+      tags:
+        - "Visitors"
+      summary: Show info about a visitor
+      description: |
+        Show informations about a visitor 
+        and about his activity (borrows and renders)
+      parameters:
+        - in: path
+          name: visitorId
+          description: VisitorId to get info about
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: startDate
+          description: |
+            This parameter will filter activities (borrows and render) by the specified
+            start timestamp
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: endDate
+          description: |
+            This parameter will filter activities (borrows and render) by the specified
+            end timestamp
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: "Display specified visitor information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorInfo"
+
 components:
   responses:
     400:
@@ -784,6 +903,7 @@ components:
         type: integer
         default: 50
       required: true
+
     pageNumberQuery:
       name: pageNumber
       in: query
@@ -819,6 +939,9 @@ components:
           $ref: "#/components/schemas/Author"
         topic:
           $ref: "#/components/schemas/Topic"
+        available:
+          type: boolean
+          default: true
 
     Author:
       type: object
@@ -905,30 +1028,35 @@ components:
           type: string
         message:
           type: string
+
     BadRequestException:
       allOf:
         - $ref: '#/components/schemas/Exception'
       example:
         type: BadRequestException
         message: Bad request
+
     NotAuthorizedException:
       allOf:
         - $ref: '#/components/schemas/Exception'
       example:
         type: NotAuthorizedException
         message: Not authorized
+
     ResourceNotFoundException:
       allOf:
         - $ref: '#/components/schemas/Exception'
       example:
         type: ResourceNotFoundException
         message: Resource of type <T> identified by <I> not found
+
     TooManyRequestsException:
       allOf:
         - $ref: '#/components/schemas/Exception'
       example:
         type: TooManyRequestsException
         message: Too many requests
+
     InternalServerException:
       allOf:
         - $ref: '#/components/schemas/Exception'
@@ -961,11 +1089,21 @@ components:
           type: string
           format: date-time
 
+    VisitorInfo:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Visitor"
+      properties:
+        borrows:
+          $ref: "#/components/schemas/BorrowList"
+        renders:
+          $ref: "#/components/schemas/RenderList"
 
     BorrowList:
       type: array
       items:
         $ref: "#/components/schemas/Borrow"
+
     Render:
       type: object
       properties:
@@ -978,19 +1116,27 @@ components:
         renderDate:
           type: string
           format: date-time
+
     RenderList:
       type: array
       items:
         $ref: "#/components/schemas/Render"
-    Visitor:
+
+    CrupdateVisitor:
       type: object
       properties:
-        id:
-          type: string
         name:
           type: string
         reference:
           type: object
+
+    Visitor:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/CrupdateVisitor"
+      properties:
+        id:
+          type: string
 
     AuthorImport:
       type: array
