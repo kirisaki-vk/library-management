@@ -252,7 +252,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 $ref: "#/components/schemas/Book"
         '400':
           $ref: '#/components/responses/400'
@@ -726,10 +725,8 @@ components:
         id:
           type: string
         author:
-          type: object
           $ref: "#/components/schemas/Author"
         topic:
-          type: object
           $ref: "#/components/schemas/Topic"
 
     Author:
@@ -759,13 +756,11 @@ components:
     UpdateBookAuthor:
       type: array
       items:
-        type: object
         $ref: "#/components/schemas/BookAuthor"
     
     UpdateBookTopic:
       type: array
       items:
-        type: object
         $ref: "#/components/schemas/BookTopic"
         
     BookAuthor:
