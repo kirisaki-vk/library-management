@@ -936,6 +936,22 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Borrow"
+    Render:
+      type: object
+      properties:
+        id:
+          type: integer
+        bookId:
+          type: string
+        visitorId:
+          type: string
+        renderDate:
+          type: string
+          format: date-time
+    RenderList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Render"
     Visitor:
       type: object
       properties:
