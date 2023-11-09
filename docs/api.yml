@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.12.1
+  version: 1.13.0
   description: STD22081
 servers:
   - url: https://library.com
@@ -720,6 +720,29 @@ paths:
               schema:
                 $ref: "#/components/schemas/Topic"
       
+
+#### VISITOR
+  /visitor:
+    get:
+      tags:
+        - "Visitor"
+      summary: Get all list of visitors
+      description: "Will be ordered by name desc"
+      parameters:
+        - in: query
+          name: name
+          description: "Will filter visitors by matching name"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "A list of visitor matching the request"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Visitor"
 components:
   responses:
     400:
