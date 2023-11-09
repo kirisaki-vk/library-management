@@ -920,19 +920,22 @@ components:
           authorId:
             $ref: "#/components/schemas/Author/properties/id"
 
+    Borrow:
+      type: object
+      properties:
+        id:
+          type: string
+        bookId:
+          type: string
+        borrowDate:
+          type: string
+          format: date-time
+
+
     BorrowList:
       type: array
       items:
-        type: object
-        properties:
-          id:
-            type: string
-          bookId:
-            type: string
-          borrowDate:
-            type: string
-            format: date-time
-
+        $ref: "#/components/schemas/Borrow"
     Visitor:
       type: object
       properties:
