@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.15.3
+  version: 1.15.4
   description: STD22081
 servers:
   - url: https://library.com
@@ -351,6 +351,8 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
+      security:
+        - oauth2: [read, write]
 
   /books/borrow/{visitorId}:
     post:
@@ -1231,5 +1233,5 @@ components:
         implicit:
           authorizationUrl: https://library.com/auth
           scopes:
-            read: read only for visitor and admin
+            read: read only for visitor or admin
             write: write for admin
