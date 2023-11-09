@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.10.3
+  version: 1.11.0
   description: STD22081
 servers:
   - url: https://library.com
@@ -47,6 +47,16 @@ paths:
             type: string
             format: date
           required: false
+        - in: query
+          name: available
+          description: |
+            If `true` it will provide all available books with all matching parameters,
+            if  `false` it will return all borrowed books,
+            if it's blank or not provided it will return all books no matter it's availability
+          schema:
+            type: boolean
+          allowEmptyValue: true
+
       responses:
         '200':
           description: The list of filtered books
@@ -194,6 +204,33 @@ paths:
         '500':
           $ref: '#/components/responses/500'
   
+  /books/info/{bookId}:
+    get:
+      tags:
+        - "Books"
+      summary: Get info of a specific book
+      description: |
+         This endpoint displays informations about a book, 
+         It will display if the specified book is available or not
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Informations about the book
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Book"
+                type: object
+                properties:
+                  available:
+                    type: boolean
+        
   /books/topics:
     put:
       tags:
@@ -300,7 +337,33 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-#### AUTHOR  
+  /book/borrow/{visitorId}/{bookId}:
+    post:
+      tags:
+        - "Books"
+      summary: Borrow a book
+      description: "Make a book borrowed by the specified visitor"
+      operationId: borrowBook
+      parameters:
+        - in: path
+          name: visitorId
+          schema:
+            type: string
+          required: true
+        - in: path
+          required: true
+          name: bookId
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "A list of users borrowed book"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BorrowList"
+
+  #### AUTHOR
   /authors:
     get:
       tags:
@@ -855,8 +918,31 @@ components:
           author: 
             $ref: "#/components/schemas/Author"
           authorId:
-            $ref: "#/components/schemas/Author/properties/id" 
-      
+            $ref: "#/components/schemas/Author/properties/id"
+
+    BorrowList:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          bookId:
+            type: string
+          borrowDate:
+            type: string
+            format: date-time
+
+    Visitor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        reference:
+          type: object
+
     AuthorImport:
       type: array
       items:
