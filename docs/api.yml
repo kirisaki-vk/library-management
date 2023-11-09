@@ -1042,6 +1042,7 @@ components:
       example:
         type: NotAuthorizedException
         message: Not authorized
+
     ResourceNotFoundException:
       allOf:
         - $ref: '#/components/schemas/Exception'
