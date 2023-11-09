@@ -80,7 +80,7 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - oauth2: [read]
-      
+
     put:
       tags:
         - "Books"
@@ -112,7 +112,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-  
+
   /books/{bookId}/authors/{authorId}:
     put:
       tags:
@@ -178,12 +178,12 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-  
+
   /book/page/{pageNumber}/size/{pageSize}:
     get:
       tags:
         - "Books"
-      summary: "Get a book on a given page of a given size"   
+      summary: "Get a book on a given page of a given size"
       operationId: getPagedBooks
       parameters:
         - $ref: "#/components/parameters/pageNumberPath"
@@ -208,7 +208,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-  
+
   /books/info/{bookId}:
     get:
       tags:
@@ -245,7 +245,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-        
+
   /books/topics:
     put:
       tags:
@@ -279,7 +279,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-  
+
   /books/{bookId}/topics/{topicId}:
     put:
       tags:
@@ -297,7 +297,7 @@ paths:
           required: true
           schema:
             type: string
-      
+
       responses:
         '200':
           description: "The given book with it's topic"
@@ -473,7 +473,7 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - oauth2: [read]
-      
+
     put:
       tags:
         - "Authors"
@@ -539,7 +539,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-  
+
   /authors/{authorId}:
     delete:
       tags:
@@ -585,16 +585,8 @@ paths:
           schema:
             type: string
           allowEmptyValue: true
-        - in: path
-          name: pageNumber
-          required: true
-          schema:
-            $ref: "#/components/parameters/pageNumberQuery"
-        - in: path
-          name: pageSize
-          required: true
-          schema:
-            $ref: "#/components/parameters/pageSizeQuery"
+        - $ref: "#/components/parameters/pageNumberPath"
+        - $ref: "#/components/parameters/pageSizePath"
           # - $ref: "#/components/parameters/queryPagination"
       responses:
         '200':
@@ -615,7 +607,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-  
+
   /authorTopics:
     get:
       tags:
@@ -644,7 +636,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-  
+
   /authors/import:
     post:
       tags:
@@ -682,7 +674,7 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - oauth2: [read, write]
-                 
+
 #### TOPICS
   /topics:
     get:
@@ -944,7 +936,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InternalServerException'
-      
+
   parameters:
     pageSizePath:
       in: path
@@ -961,23 +953,23 @@ components:
         type: integer
         default: 1
       required: true
-    
+
     pathPagination:
       name: pathPaginantion
       in: path
       required: true
       schema:
         type: object
-        properties: 
+        properties:
           pageSize:
             type: number
             default: 50
             # $ref: "#/components/parameters/pageSizePath"
-          pageNumber: 
+          pageNumber:
             type: number
             default: 1
             # $ref: "#/components/parameters/pageNumberPath"
-          
+
     pageSizeQuery:
       name: pageSize
       in: query
@@ -993,7 +985,7 @@ components:
         type: integer
         default: 1
       required: true
-    
+
     queryPagination:
       name: queryPagination
       in: query
@@ -1037,7 +1029,7 @@ components:
           enum:
             - M
             - F
-    
+
     CrupdateBooks:
       type: object
       properties:
@@ -1048,17 +1040,17 @@ components:
         releaseDate:
           type: string
           format: dat
-        
+
     UpdateBookAuthor:
       type: array
       items:
         $ref: "#/components/schemas/BookAuthor"
-    
+
     UpdateBookTopic:
       type: array
       items:
         $ref: "#/components/schemas/BookTopic"
-        
+
     BookAuthor:
       type: object
       properties:
@@ -1069,7 +1061,7 @@ components:
       required:
         - bookId
         - authorId
-    
+
     BookTopic:
       type: object
       properties:
@@ -1080,11 +1072,11 @@ components:
       required:
         - "bookId"
         - "topicId"
-    
+
     Topic:
       type: object
       properties:
-        id: 
+        id:
           type: string
         topic:
           type: string
@@ -1092,7 +1084,7 @@ components:
           - ROMANCE
           - COMEDY
           - OTHER
-    
+
     AuthorTopic:
       type: object
       allOf:
@@ -1102,7 +1094,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Topic"
-    
+
     Exception:
       type: object
       properties:
@@ -1153,7 +1145,7 @@ components:
         allOf:
           - $ref: "#/components/schemas/CrupdateBooks"
         properties:
-          author: 
+          author:
             $ref: "#/components/schemas/Author"
           authorId:
             $ref: "#/components/schemas/Author/properties/id"
@@ -1225,10 +1217,10 @@ components:
       items:
         type: object
         properties:
-          authorName: 
+          authorName:
             $ref: "#/components/schemas/Author/properties/name"
           sex:
-            $ref: "#/components/schemas/Author/properties/id"  
+            $ref: "#/components/schemas/Author/properties/id"
   securitySchemes:
     oauth2:
       type: oauth2
