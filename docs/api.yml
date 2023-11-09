@@ -868,7 +868,7 @@ paths:
   /visitor/{visitorId}/info:
     get:
       tags:
-        - "Visitors"
+        - "Visitor"
       summary: Show info about a visitor
       description: |
         Show informations about a visitor 
