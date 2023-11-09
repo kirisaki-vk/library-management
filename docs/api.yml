@@ -1217,3 +1217,12 @@ components:
             $ref: "#/components/schemas/Author/properties/name"
           sex:
             $ref: "#/components/schemas/Author/properties/id"  
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://library.com/auth
+          scopes:
+            read: read only for visitor and admin
+            write: write for admin
