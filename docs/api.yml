@@ -354,6 +354,7 @@ paths:
           required: true
         - in: query
           required: true
+          description: Contains an array of bookId or only one bookId to be borrowed
           name: bookId
           schema:
             type: array
