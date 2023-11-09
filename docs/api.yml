@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.13.0
+  version: 1.14.0
   description: STD22081
 servers:
   - url: https://library.com
@@ -790,6 +790,45 @@ paths:
                     items:
                       $ref: "#/components/schemas/Visitor"
                   - $ref: "#/components/schemas/Visitor"
+
+  /visitor/{visitorId}/info:
+    get:
+      tags:
+        - "Visitors"
+      summary: Show info about a visitor
+      description: |
+        Show informations about a visitor 
+        and about his activity (borrows and renders)
+      parameters:
+        - in: path
+          name: visitorId
+          description: VisitorId to get info about
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: startDate
+          description: |
+            This parameter will filter activities (borrows and render) by the specified
+            start timestamp
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: endDate
+          description: |
+            This parameter will filter activities (borrows and render) by the specified
+            end timestamp
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: "Display specified visitor information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorInfo"
 
 components:
   responses:
