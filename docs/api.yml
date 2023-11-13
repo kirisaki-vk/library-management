@@ -354,12 +354,14 @@ paths:
       security:
         - oauth2: [read, write]
 
-  /books/borrow/{visitorId}:
+  /books/{visitorId}:
     post:
       tags:
         - "Books"
       summary: Borrow a book
-      description: "Make a book borrowed by the specified visitor"
+      description: |
+        Make a book or several books borrowed or rendered by the specified visitor.
+        Operations are specified by the `action` path parameter.
       operationId: borrowBook
       parameters:
         - in: path
@@ -367,9 +369,16 @@ paths:
           schema:
             type: string
           required: true
+
+        - in: query
+          name: action
+          required: true
+          schema:
+            $ref: "#/components/schemas/BookActions"
+
         - in: query
           required: true
-          description: Contains an array of bookId or only one bookId to be borrowed
+          description: Contains an array of bookId or only one bookId to be borrowed or rendered
           name: bookId
           schema:
             oneOf:
@@ -396,48 +405,6 @@ paths:
           $ref: '#/components/responses/500'
       security:
           - oauth2: [read, write]
-
-  /books/render/{visitorId}:
-    post:
-      tags:
-        - "Books"
-      summary: Render a book
-      description: "Make a book rendered by a specified visitor"
-      parameters:
-        - in: path
-          name: visitorId
-          schema:
-            type: string
-          required: true
-        - in: query
-          required: true
-          description: Contains an array of bookId or only one bookId to be rendered
-          name: bookId
-          schema:
-            oneOf:
-              - type: array
-                items:
-                  type: string
-              - type: string
-      responses:
-        '200':
-          description: "A list of users borrowed book"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RenderList"
-        '400':
-          $ref: '#/components/responses/400'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '429':
-          $ref: '#/components/responses/429'
-        '500':
-          $ref: '#/components/responses/500'
-      security:
-        - oauth2: [read, write]
 
   #### AUTHOR
   /authors:
