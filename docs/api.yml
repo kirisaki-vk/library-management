@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 2.0.1
+  version: 2.2.0
   description: STD22081
 servers:
   - url: https://library.com
@@ -65,9 +65,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -99,9 +103,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -136,7 +144,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Book"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/Book"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -165,9 +177,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Book"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -195,9 +211,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Book"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -230,11 +250,10 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: "#/components/schemas/Book"
-                type: object
+                  - $ref: "#/components/schemas/ResponseBody"
                 properties:
-                  available:
-                    type: boolean
+                  body:
+                    $ref: "#/components/schemas/Book"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -266,9 +285,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Book"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -304,7 +327,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Book"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/Book"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -340,7 +367,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BooksImport"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/BooksImport"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -392,7 +423,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BorrowList"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/BorrowList"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -425,9 +460,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Author"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -457,9 +496,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Author"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -493,9 +536,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Author"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -525,7 +572,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Author"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/Author"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -561,9 +612,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Author"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Author"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -592,7 +647,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthorTopic"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/AuthorTopic"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -628,7 +687,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthorImport"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/AuthorImport"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -662,9 +725,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Topic"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Topic"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -691,7 +758,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Topic"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/Topic"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -719,7 +790,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Topic"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/Topic"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -750,9 +825,23 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Visitor"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Visitor"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
     put:
       tags:
         - "Visitor"
@@ -771,7 +860,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Visitor"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/Visitor"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -806,6 +899,8 @@ paths:
           content:
             application/json:
               schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
                 oneOf:
                   - type: array
                     items:
@@ -859,7 +954,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VisitorInfo"
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/VisitorInfo"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -873,37 +972,47 @@ paths:
 
 components:
   responses:
-    400:
-      description: Bad request
+    ResponseTemplate:
+      description: Base response for each request
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/BadRequestException'
-    403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NotAuthorizedException'
-    404:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResourceNotFoundException'
-    429:
-      description: Too many requests to the API
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TooManyRequestsException'
-    500:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InternalServerException'
+            allOf:
+              - $ref: "#/components/schemas/ResponseBody"
+            properties:
+              body:
+                type: object
 
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BadRequestException"
+    403:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ForbiddenException"
+    404:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResourceNotFoundException"
+    429:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TooManyRequestsException"
+    500:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InternalServerException"
   parameters:
     pageSizePath:
       in: path
@@ -969,6 +1078,25 @@ components:
             # $ref: "#/components/parameters/pageNumberQuery"
 
   schemas:
+    ResponseBody:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/ResponseStatus"
+        body:
+          type: object
+
+    ResponseStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      example:
+        code: 200
+        message: OK
+
     Book:
       type: object
       allOf:
@@ -1062,48 +1190,53 @@ components:
           items:
             $ref: "#/components/schemas/Topic"
 
-    Exception:
-      type: object
-      properties:
-        type:
-          type: string
-        message:
-          type: string
-
     BadRequestException:
       allOf:
-        - $ref: '#/components/schemas/Exception'
+        - $ref: '#/components/schemas/ResponseBody'
       example:
-        type: BadRequestException
-        message: Bad request
+        message: BadRequest
+        code: 400
+        body: {}
 
     NotAuthorizedException:
       allOf:
-        - $ref: '#/components/schemas/Exception'
+        - $ref: '#/components/schemas/ResponseBody'
       example:
-        type: NotAuthorizedException
+        code: 401
         message: Not authorized
+        body: {}
+
+    ForbiddenException:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBody'
+      example:
+        code: 403
+        message: Forbidden
+        body: {}
 
     ResourceNotFoundException:
       allOf:
-        - $ref: '#/components/schemas/Exception'
+        - $ref: '#/components/schemas/ResponseBody'
       example:
-        type: ResourceNotFoundException
-        message: Resource of type <T> identified by <I> not found
+        code: 404
+        message: ResourceNotFound
+        body: {}
 
     TooManyRequestsException:
       allOf:
-        - $ref: '#/components/schemas/Exception'
+        - $ref: '#/components/schemas/ResponseBody'
       example:
-        type: TooManyRequestsException
-        message: Too many requests
+        code: 429
+        message: TooManyRequests
+        body: {}
 
     InternalServerException:
       allOf:
-        - $ref: '#/components/schemas/Exception'
+        - $ref: '#/components/schemas/ResponseBody'
       example:
-        type: InternalServerException
-        message: Unexpected error
+        code: 500
+        type: InternalServerError
+        body: {}
 
     BooksImport:
       type: array
