@@ -389,7 +389,7 @@ paths:
     post:
       tags:
         - "Books"
-      summary: Borrow a book
+      summary: Borrow or render a book
       description: |
         Make a book or several books borrowed or rendered by the specified visitor.
         Operations are specified by the `action` path parameter.
